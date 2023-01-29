@@ -17,5 +17,11 @@
     "noUncheckedIndexedAccess": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "paths": {
+    "@ui/*": ["./src/components/ui/*"],
+    "@components/*": ["./src/components/*"],
+    "@pages/*": ["./src/pages/*"],
+    "@utils/*": ["./src/utils/*"],
+  }
 }
