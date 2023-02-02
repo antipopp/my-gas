@@ -1,39 +1,38 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
-import Sidebar from "../SideBar/Sidebar";
 import Button from "../ui/Button/Button";
 import Logo from "../ui/Logo/Logo";
 
-const AppBar = () => {
+type AppBarProps = {
+  toggleSidebar: () => void;
+};
+
+const AppBar = ({ toggleSidebar }: AppBarProps) => {
   const { data: sessionData } = useSession();
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <div className="flex items-center justify-between bg-primary px-4 py-2 shadow-md">
-      <Logo onClick={toggleSidebar} />
-      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
-          {sessionData && (
-            <p className="text-secondary">Welcome, {sessionData.user?.name}</p>
-          )}
+    <header className="flex-shrink-0 lg:left-64 width-[calc(100%_-_16rem)]">
+      <div className="flex items-center justify-between bg-primary px-4 py-2 shadow-md">
+        <Logo onClick={toggleSidebar} />
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            {sessionData && (
+              <p className="text-secondary">
+                Welcome, {sessionData.user?.name}
+              </p>
+            )}
+          </div>
+          <Button
+            onClick={() => {
+              sessionData ? void signOut() : void signIn();
+            }}
+            variant="outline"
+            color="secondary"
+          >
+            {sessionData ? "Sign Out" : "Sign In"}
+          </Button>
         </div>
-        <Button
-          onClick={() => {
-            sessionData ? void signOut() : void signIn();
-          }}
-          variant="outline"
-          color="secondary"
-        >
-          {sessionData ? "Sign Out" : "Sign In"}
-        </Button>
       </div>
-    </div>
+    </header>
   );
 };
 

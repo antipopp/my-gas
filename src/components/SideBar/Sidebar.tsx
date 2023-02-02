@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, ScaleIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import Logo from "../ui/Logo/Logo";
@@ -6,7 +6,6 @@ import Menu from "../ui/Menu/Menu";
 import MenuLink from "../ui/Menu/MenuLink";
 
 type SidebarProps = {
-  className?: string;
   isOpen: boolean;
   toggleSidebar: () => void;
 };
@@ -17,14 +16,19 @@ const items = [
     label: "Dashboard",
     href: "/",
   },
+  {
+    icon: <ScaleIcon className="h-5 w-5" />,
+    label: "Usage",
+    href: "/usage",
+  }
 ];
 
-const Sidebar = ({ className, isOpen, toggleSidebar }: SidebarProps) => {
+const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
   // current location is used to determine which menu item is active
   const { pathname } = useRouter();
 
   return (
-    <div
+    <aside
       className={classNames(
         "fixed",
         "top-0",
@@ -61,7 +65,7 @@ const Sidebar = ({ className, isOpen, toggleSidebar }: SidebarProps) => {
           ))}
         </ul>
       </Menu>
-    </div>
+    </aside>
   );
 };
 

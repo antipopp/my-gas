@@ -28,6 +28,7 @@ const MenuLink = ({
           "flex",
           "items-center",
           "space-x-2",
+          "my-2",
           "px-4",
           "py-2",
           "rounded-md",
