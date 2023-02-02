@@ -24,7 +24,7 @@ const AppBar = () => {
           )}
         </div>
         <Button
-          onClick={sessionData ? () => signOut() : () => signIn()}
+          onClick={() => sessionData ? signOut() : signIn()}
           variant="outline"
           color="secondary"
         >
