@@ -20,7 +20,7 @@ const items = [
     icon: <ScaleIcon className="h-5 w-5" />,
     label: "Usage",
     href: "/usage",
-  }
+  },
 ];
 
 const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
@@ -35,21 +35,23 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
         "left-0",
         "h-screen",
         "w-64",
-        "bg-primary",
-        "shadow",
-        "z-10",
-        "transition",
-        "duration-300",
-        "ease-in-out",
-        isOpen && "transform",
-        isOpen && "translate-x-0",
-        !isOpen && "-translate-x-full"
+        "z-10"
       )}
     >
-      <div className="flex items-center justify-between border-b bg-brand px-4 py-2">
+      <div className="bg-brand flex items-center justify-between border-b px-4 py-2">
         <Logo onClick={toggleSidebar} />
       </div>
-      <Menu fullHeight>
+      <Menu
+        fullHeight
+        className={classNames(
+          "transition",
+          "duration-300",
+          "ease-in-out",
+          isOpen && "transform",
+          isOpen && "translate-x-0",
+          !isOpen && "-translate-x-full"
+        )}
+      >
         <ul>
           {items.map((item) => (
             <li key={item.label}>
