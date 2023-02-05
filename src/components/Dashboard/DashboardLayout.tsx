@@ -32,7 +32,7 @@ const DashboardLayoutContent = ({
   children: React.ReactNode;
 }) => {
   return (
-    <main className={classNames("flex", "flex-auto", "flex-col", "w-full", "p-24")}>
+    <main className={classNames("flex", "flex-auto", "flex-col", "w-full", "p-24", "bg-slate-50")}>
       {children}
     </main>
   );

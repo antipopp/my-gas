@@ -1,28 +1,38 @@
 import {
-    ConsumptionCreateInputSchema,
-    ConsumptionDeleteArgsSchema,
-    ConsumptionFindUniqueArgsSchema
-} from "../../../../prisma/generated/zod";
+  ConsumptionCreateInputObjectSchema, ConsumptionDeleteOneSchema, ConsumptionFindUniqueSchema
+} from "../../../../prisma/generated/schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const consumptionRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.consumption.findMany();
+    return ctx.prisma.consumption.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+    });
   }),
   getOne: protectedProcedure
-    .input(ConsumptionFindUniqueArgsSchema)
+    .input(ConsumptionFindUniqueSchema)
     .query(({ ctx, input }) => {
       return ctx.prisma.consumption.findUnique(input);
     }),
   create: protectedProcedure
-    .input(ConsumptionCreateInputSchema)
+    .input(ConsumptionCreateInputObjectSchema)
     .mutation(({ ctx, input }) => {
+      const user = ctx.session.user;
       return ctx.prisma.consumption.create({
-        data: input,
+        data: {
+          ...input,
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+        },
       });
     }),
   delete: protectedProcedure
-    .input(ConsumptionDeleteArgsSchema)
+    .input(ConsumptionDeleteOneSchema)
     .mutation(({ ctx, input }) => {
       return ctx.prisma.consumption.delete(input);
     }),

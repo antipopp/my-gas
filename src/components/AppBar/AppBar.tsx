@@ -1,5 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Button from "../ui/Button/Button";
+import { Button } from "../ui/Button/Button";
 import Logo from "../ui/Logo/Logo";
 
 type AppBarProps = {

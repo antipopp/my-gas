@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -26,19 +26,18 @@ module.exports = {
       info: '#3b82f6',
       success: '#10b981',
       warning: '#f59e0b',
-      white: colors.white,
       black: colors.black,
-      gray: colors.slate,
-      blue: colors.blue,
-      red: colors.red,
-      yellow: colors.amber,
-      green: colors.green,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
       indigo: colors.indigo,
-      purple: colors.purple,
-      pink: colors.pink,
+      yellow: colors.yellow,
+      slate: colors.slate,
     },
     extend: {},
     variants: {},
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/typography'),
+    ],
   },
 };

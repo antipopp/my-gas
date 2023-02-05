@@ -1,8 +1,5 @@
-import {
-    UserCreateInputSchema,
-    UserDeleteArgsSchema,
-    UserFindUniqueArgsSchema
-} from "../../../../prisma/generated/zod";
+
+import { UserCreateInputObjectSchema, UserDeleteOneSchema, UserFindUniqueSchema } from "../../../../prisma/generated/schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -10,19 +7,19 @@ export const userRouter = createTRPCRouter({
     return ctx.prisma.user.findMany();
   }),
   getOne: protectedProcedure
-    .input(UserFindUniqueArgsSchema)
+    .input(UserFindUniqueSchema)
     .query(({ ctx, input }) => {
       return ctx.prisma.user.findUnique(input);
     }),
   create: protectedProcedure
-    .input(UserCreateInputSchema)
+    .input(UserCreateInputObjectSchema)
     .mutation(({ ctx, input }) => {
       return ctx.prisma.user.create({
         data: input,
       });
     }),
   delete: protectedProcedure
-    .input(UserDeleteArgsSchema)
+    .input(UserDeleteOneSchema)
     .mutation(({ ctx, input }) => {
       return ctx.prisma.user.delete(input);
     }),
