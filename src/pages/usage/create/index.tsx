@@ -30,7 +30,7 @@ const CreateUsagePage = () => {
     <div>
       <Typography variant="title">Create Usage</Typography>
       <Card className="mt-4">
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form onSubmit={handleSubmit((data) => mutate(data))}>
           <div className="my-2 flex w-full flex-row items-center justify-evenly">
             <Input
               {...register("start")}
